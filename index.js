@@ -37,6 +37,15 @@ app.post('/widgets', (req, res) => { //определить конечную т�
     )
 })
 
-app.listen(8080, () => { //Первый аргумент — это порт 8080, на котором будут прослушиваться запросы. Второй (необязательный) аргумент функции, в которой адрес, по которому доступно приложение, выводится в консоль.
-    console.log(`API up at: http://localhost:8080`)
+//DELETE
+app.delete('widgets/:id',(req,res)=>{
+    if (typeof  widgets[req.params.id - 1] === 'udefined'){
+        return res.status(404).send({error: "Widget not found"})
+    }
+    widgets.splice(req.params.id-1,1)
+    res.status(204).send()
+})
+
+app.listen(8080, () =>{
+    console.log('API up at: http://localhost:8080')
 })
